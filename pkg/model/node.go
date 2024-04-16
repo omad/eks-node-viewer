@@ -77,11 +77,13 @@ func NewNodeFromNodeClaim(nc *v1beta1.NodeClaim) *Node {
 
 func (n *Node) IsOnDemand() bool {
 	return n.node.Labels["karpenter.sh/capacity-type"] == "on-demand" ||
+		n.node.Labels["nodetype"] == "ondemand" ||
 		n.node.Labels["eks.amazonaws.com/capacityType"] == "ON_DEMAND"
 }
 
 func (n *Node) IsSpot() bool {
 	return n.node.Labels["karpenter.sh/capacity-type"] == "spot" ||
+		n.node.Labels["nodetype"] == "spot" ||
 		n.node.Labels["eks.amazonaws.com/capacityType"] == "SPOT"
 }
 
